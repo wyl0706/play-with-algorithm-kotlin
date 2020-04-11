@@ -1,7 +1,7 @@
-package play.with.algorithm.chapter2
+package play.with.algorithm
 
-interface Sort<T> {
-    fun sort(arr: Array<T>, compare: (c1: T, c2: T) -> Int)
+interface Sort<T : Comparable<T>> {
+    fun sort(arr: Array<T>)
 
     fun swap(arr: Array<T>, i: Int, j: Int) {
         val temp = arr[i]

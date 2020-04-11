@@ -1,14 +1,25 @@
 package play.with.algorithm.chapter3
 
-import play.with.algorithm.chapter2.Sort
+import play.with.algorithm.Sort
 
-class MergeSort<T> : Sort<T> {
-    override fun sort(arr: Array<T>, compare: (c1: T, c2: T) -> Int) {
+class MergeSort<T : Comparable<T>> : Sort<T> {
+    // 将[start...end]进行排序
+    override fun sort(arr: Array<T>) {
 
     }
-    // 将[start...end]进行排序
-    fun mergeSort(arr: Array<T>, compare: (c1: T, c2: T) -> Int, start: Int, end: Int) {
+
+    // 对[start...end]进行归并排序
+    private fun mergeSort(arr: Array<T>, start: Int, end: Int) {
         if (start >= end) return
+        val mid = (start + end) / 2
+        mergeSort(arr, start, mid)
+        mergeSort(arr, mid + 1, end)
+        merge(arr, start, mid, end)
+    }
+
+    // 对[start...mid]和[mid+1...end]进行归并
+    private fun merge(arr: Array<T>, start: Int, mid: Int, end: Int) {
+
     }
 
 }
