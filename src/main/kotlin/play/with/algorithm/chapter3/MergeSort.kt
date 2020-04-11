@@ -2,15 +2,16 @@ package play.with.algorithm.chapter3
 
 import play.with.algorithm.Sort
 
-class MergeSort<T : Comparable<T>> : Sort<T> {
+open class MergeSort<T : Comparable<T>> : Sort<T> {
     // 将[start...end]进行排序
     override fun sort(arr: Array<T>) {
         mergeSort(arr, 0, arr.size - 1)
     }
 
     // 对[start...end]进行归并排序
-    private fun mergeSort(arr: Array<T>, start: Int, end: Int) {
+    protected open fun mergeSort(arr: Array<T>, start: Int, end: Int) {
         if (start >= end) return
+
         val mid = (start + end) / 2
         mergeSort(arr, start, mid)
         mergeSort(arr, mid + 1, end)
@@ -18,7 +19,7 @@ class MergeSort<T : Comparable<T>> : Sort<T> {
     }
 
     // 对[start...mid]和[mid+1...end]进行归并
-    private fun merge(arr: Array<T>, start: Int, mid: Int, end: Int) {
+    protected fun merge(arr: Array<T>, start: Int, mid: Int, end: Int) {
         // copyOfRange是取[start...end),所以需要end+1
         val temp = arr.copyOfRange(start, end + 1)
 
@@ -39,6 +40,42 @@ class MergeSort<T : Comparable<T>> : Sort<T> {
                     j++
                 }
             }
+        }
+    }
+}
+
+class BatterMergeSort<T : Comparable<T>> : MergeSort<T>() {
+    // 对[start...end]进行归并排序
+    override fun mergeSort(arr: Array<T>, start: Int, end: Int) {
+        if (end - start < 16) {
+            insertSort(arr, start, end)
+            return
+        }
+
+        val mid = (start + end) / 2
+        mergeSort(arr, start, mid)
+        mergeSort(arr, mid + 1, end)
+        if (arr[mid] > arr[mid + 1]) {
+            merge(arr, start, mid, end)
+        }
+    }
+
+    private fun insertSort(arr: Array<T>, start: Int, end: Int) {
+        for (i in start..end) {
+            val value = arr[i]
+            var insertIndex = 0
+            for (j in i downTo start) {
+                insertIndex = j
+                if (j == 0) {
+                    break
+                }
+                if (value < arr[j - 1]) {
+                    arr[j] = arr[j - 1]
+                } else {
+                    break
+                }
+            }
+            arr[insertIndex] = value
         }
     }
 }

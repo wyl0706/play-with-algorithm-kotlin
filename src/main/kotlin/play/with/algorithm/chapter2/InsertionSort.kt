@@ -21,8 +21,7 @@ class InsertionSort<T : Comparable<T>> : Sort<T> {
 
 class BetterInsertionSort<T : Comparable<T>> : Sort<T> {
     /**
-     * 选择排序
-     * kotlin虽然支持运算符重载，但是不支持泛型类型使用小于操作符，所以只能传入一个函数参数
+     * 插入排序
      */
     override fun sort(arr: Array<T>) {
         for (i in 1 until arr.size) {

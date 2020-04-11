@@ -4,6 +4,7 @@ import play.with.algorithm.chapter2.BetterInsertionSort
 import play.with.algorithm.chapter2.InsertionSort
 import play.with.algorithm.chapter2.SelectionSort
 import play.with.algorithm.chapter2.ShellSort
+import play.with.algorithm.chapter3.BatterMergeSort
 import play.with.algorithm.chapter3.MergeSort
 
 class SortTestHelper<T : Comparable<T>> {
@@ -50,13 +51,14 @@ class SortTestHelper<T : Comparable<T>> {
 
 fun main() {
     val helper = SortTestHelper<Int>()
-    //val testArr = helper.generateNearlyOrderedRandomArray(40000, 1000, 10000000, 10)
-    val testArr = helper.generateRandomArray(400000, 100, 100000)
+    val testArr = helper.generateNearlyOrderedRandomArray(100000, 1000, 10000000, 10)
+    //val testArr = helper.generateRandomArray(400000, 100, 1000000)
     // 此处的compare是测试Helper校验对比结果使用
     //helper.testSort("SelectionSort", SelectionSort(), testArr.clone())
     //helper.testSort("InsertionSort", InsertionSort(), testArr.clone())
     //helper.testSort("BetterInsertionSort", BetterInsertionSort(), testArr.clone())
     helper.testSort("ShellSort", ShellSort(), testArr.clone())
     helper.testSort("MergeSort", MergeSort(), testArr.clone())
+    helper.testSort("BatterMergeSort", BatterMergeSort(), testArr.clone())
 }
 
